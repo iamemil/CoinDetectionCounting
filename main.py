@@ -11,7 +11,7 @@ gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 median_blur = cv2.medianBlur(gray, 5)
 
 # Detect circles using HoughCircles function
-circles = cv2.HoughCircles(median_blur, cv2.HOUGH_GRADIENT, 0.9, 50, param1=100, param2=72, minRadius=160, maxRadius=260)
+circles = cv2.HoughCircles(median_blur, cv2.HOUGH_GRADIENT, 0.9, 50, param1=97, param2=60, minRadius=50, maxRadius=80)
 
 # Convert circles to integers
 circles = np.uint16(np.around(circles))
@@ -23,17 +23,17 @@ for i in circles[0, :]:
     cv2.circle(img, (i[0], i[1]), i[2], (0, 255, 0), 2)
     #print(i[2])
     # Calculate coin value based on diameter
-    if i[2] > 220:
+    if i[2] > 75:
         total += 50
-    elif i[2] >= 214:
+    elif i[2] >= 70:
         total += 200
-    elif i[2] >= 202:
+    elif i[2] >= 67:
         total += 20
-    elif i[2] >= 188:
+    elif i[2] >= 65:
         total += 10
-    elif i[2] >= 183:
+    elif i[2] >= 62:
         total += 100
-    elif i[2] >= 160:
+    elif i[2] >= 50:
         total += 5
 
 """
