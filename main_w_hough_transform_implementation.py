@@ -45,8 +45,8 @@ def main():
     img = cv.imread('input/coins.jpg')
     # Convert image to grayscale
     gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-
-    edges = cv.Canny(gray, 400, 550)
+    gray = cv.medianBlur(gray,7)
+    edges = cv.Canny(gray, 200, 300)
     plt.subplot(121), plt.imshow(gray, cmap='gray')
     plt.subplot(122), plt.imshow(edges, cmap='gray')
     plt.show()
@@ -55,7 +55,7 @@ def main():
 
     if(multiple):
         img_array = np.array(edges)
-        circles = hough_circles(img_array, 55, 80, 120)
+        circles = hough_circles(img_array, 55, 80, 140)
         for x, y, r in circles:
             cv.circle(img, (x, y), r, (0, 255, 0), 2)
 
